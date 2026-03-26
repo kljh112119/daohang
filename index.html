@@ -3,197 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高端影视导航 - 多线路完美版</title>
+    <title>高端影视导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-6px) scale(1.03); }
+        .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        
+        .carousel { position: relative; width: 100%; height: 80vh; overflow: hidden; }
+        .carousel-item { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+        .carousel-item.active { opacity: 1; }
+    </style>
 </head>
 <body class="bg-[#0F1014] text-white transition-colors duration-300">
 
+<!-- 风格切换 -->
+<div class="fixed top-5 right-5 z-50 flex gap-2">
+    <button onclick="setStyle('dark')" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 text-sm">暗黑</button>
+    <button onclick="setStyle('gold')" class="w-9 h-9 rounded-full bg-[#D4AF37]/20 flex items-center justify-center hover:bg-[#D4AF37]/30 text-sm">金色</button>
+    <button onclick="setStyle('light')" class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 text-sm">浅色</button>
+</div>
+
 <!-- 导航栏 -->
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4 bg-transparent">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-        <a class="text-2xl font-bold text-[#E50914] flex items-center gap-2">
-            <i class="fa fa-play-circle"></i>
-            <span>高端影视导航</span>
-        </a>
-        <div class="flex gap-3">
-            <button onclick="setStyle('dark')" class="px-3 py-1 rounded bg-gray-700 hover:bg-gray-600">暗黑</button>
-            <button onclick="setStyle('gold')" class="px-3 py-1 rounded bg-yellow-900 hover:bg-yellow-800">黑金</button>
-            <button onclick="setStyle('light')" class="px-3 py-1 rounded bg-white text-black hover:bg-gray-200">明亮</button>
+<nav id="navbar" class="fixed w-full top-0 z-40 py-4 transition-all duration-300">
+    <div class="container mx-auto px-5 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-[#E50914]">影视导航</a>
+        <a href="#" class="text-2xl font-bold text-[#E50914]">无广告 无广告 无广告 </a>
+        <div class="hidden md:flex gap-6 text-lg">
+             <a href="" class="hover:text-[#E50914] transition-colors">首页没有的到导航网址去看</a>
+            <a href="#movie" class="hover:text-[#E50914] transition-colors">热门电影</a>
+            <a href="#tv" class="hover:text-[#E50914] transition-colors">热门电视剧</a>
+            <a href="#anime" class="hover:text-[#E50914] transition-colors">热门动漫</a>
+            <a href="#nav" class="hover:text-[#E50914] transition-colors">网址导航</a>
         </div>
     </div>
 </nav>
 
-<!-- 主体 -->
-<div class="container mx-auto px-4 pt-24 pb-16">
-    <!-- 热门动漫 -->
-    <section class="mb-12">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
-            <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>热门动漫
-        </h2>
-        <div class="grid grid-cols-2 sm:cols-3 md:cols-4 lg:cols-5 gap-4 md:gap-6">
-
-            <!-- 遮天 -->
-            <div class="rounded-xl overflow-hidden bg-black/30 shadow-xl">
-                <img src="https://tncache1-f1.v3mh.com/image/25-12-25/DIGC6Ipikt.jpg"
-                     onclick="openMultiSource('遮天', [
-                         {name:'线路①', urls:['https://cdn7.ryplay7.com/20251225/17969_c0d39a0d/index.m3u8','https://cdn7.ryplay7.com/20251225/17968_53913a7e/index.m3u8','https://cdn7.ryplay7.com/20251225/17967_3f39635e/index.m3u8','https://cdn.ryplay12.com/20251231/29658_b8653c9b/index.m3u8','https://cdn.ryplay12.com/20260107/30864_524551aa/index.m3u8','https://cdn.ryplay12.com/20260114/31365_767979c9/index.m3u8','https://cdn.ryplay12.com/20260121/31612_c0bdcda4/index.m3u8','https://cdn.ryplay12.com/20260128/31866_911f5533/index.m3u8','https://cdn.ryplay12.com/20260204/32246_76bb8045/index.m3u8','https://cdn.ryplay12.com/20260211/32607_2dd9837e/index.m3u8','https://cdn.ryplay12.com/20260218/32932_6c6f7d6f/index.m3u8','https://cdn.ryplay12.com/20260225/33176_bef332a1/index.m3u8','https://cdn.ryplay12.com/20260304/33426_2cd01517/index.m3u8','https://cdn.ryplay12.com/20260311/33642_f4544ed2/index.m3u8','https://cdn.ryplay12.com/20260318/33940_933df950/index.m3u8','https://cdn.ryplay12.com/20260325/34191_b37188d6/index.m3u8']},
-                         {name:'线路②', urls:['https://cdn7.ryplay7.com/share/e7ee1d51662c87138516981a77133f0d','https://cdn7.ryplay7.com/share/916cbd6f20415c2214d441deaefedf75','https://cdn7.ryplay7.com/share/a52357f1ce8160dee6563b6a3391ffa8','https://cdn.ryplay12.com/share/992b8175dd647e8e187e7cc2e0572623','https://cdn.ryplay12.com/share/518a0d4fdd28c9875618b3d7833831e2','https://cdn.ryplay12.com/share/f5ca5e77fac3302dc36d319d35c7bf65','https://cdn.ryplay12.com/share/413f2dc2067072c4339624db3d9fa537','https://cdn.ryplay12.com/share/a790b04a0380999fb3ea958c0e6eb5dc','https://cdn.ryplay12.com/share/7c3aa93f86af77d8b1071d5fd2b4c91a','https://cdn.ryplay12.com/share/fc8bdffcd745cc1b8556a8868469a55b','https://cdn.ryplay12.com/share/95c14ff9ca2c5d8ead4a18b1e830d504','https://cdn.ryplay12.com/share/84d443585ec2caf0bf31681f10085df7','https://cdn.ryplay12.com/share/c746c52c4c3f89696680731b2f46e563','https://cdn.ryplay12.com/share/f78b6f0004f7094edb7e9a63cdabbe9c','https://cdn.ryplay12.com/share/cc01090a65650c8670a1d8b13a0a6fc2','https://cdn.ryplay12.com/share/48c1462ea0fb7789b592dbce582de58a']}
-                     ])"
-                     class="w-full aspect-[2/3] object-cover cursor-pointer">
-                <div class="p-3">
-                    <div class="font-medium truncate">遮天 最新</div>
-                    <button onclick="go('https://pan.baidu.com/xxx')" class="mt-2 w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 rounded">
-                        <i class="fa fa-cloud mr-1"></i>网盘转存
-                    </button>
-                </div>
-            </div>
-
-            <!-- 剑来第二季 -->
-            <div class="rounded-xl overflow-hidden bg-black/30 shadow-xl">
-                <img src="https://tncache1-f1.v3mh.com/image/25-12-25/DIGC6Ipikt.jpg"
-                     onclick="openMultiSource('剑来第二季', [
-                         {name:'线路①', urls:['https://cdn7.ryplay7.com/20251225/17969_c0d39a0d/index.m3u8']},
-                         {name:'线路②', urls:['https://cdn7.ryplay7.com/share/e7ee1d51662c87138516981a77133f0d']}
-                     ])"
-                     class="w-full aspect-[2/3] object-cover cursor-pointer">
-                <div class="p-3">
-                    <div class="font-medium truncate">剑来第二季 第16集</div>
-                    <button onclick="go('https://pan.baidu.com/xxx')" class="mt-2 w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 rounded">
-                        <i class="fa fa-cloud mr-1"></i>网盘转存
-                    </button>
-                </div>
-            </div>
-
-            <!-- 斗罗大陆2：绝世 -->
-            <div class="rounded-xl overflow-hidden bg-black/30 shadow-xl">
-                <img src="https://tncache1-f1.v3mh.com/image/25-10-11/7dmMHqoc5W.jpg"
-                     onclick="openMultiSource('斗罗大陆2：绝世唐门', [
-                         {name:'线路①', urls:['https://cdn.ryplay10.com/20240919/5754_8dc29deb/index.m3u8']},
-                         {name:'线路②', urls:['https://cdn.ryplay10.com/share/0dbcf39d413231953d442f2f17f80cd5']}
-                     ])"
-                     class="w-full aspect-[2/3] object-cover cursor-pointer">
-                <div class="p-3">
-                    <div class="font-medium truncate">斗罗大陆2 第145集</div>
-                    <button onclick="go('https://pan.baidu.com/xxx')" class="mt-2 w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 rounded">
-                        <i class="fa fa-cloud mr-1"></i>网盘转存
-                    </button>
-                </div>
-            </div>
-
-            <!-- 神印王座 -->
-            <div class="rounded-xl overflow-hidden bg-black/30 shadow-xl">
-                <img src="https://tncache1-f1.v3mh.com/image/25-12-04/IFVy7e22kN.jpg"
-                     onclick="openMultiSource('神印王座', [
-                         {name:'线路①', urls:['https://cdn4.ryplay4.com/20240927/73522_fec7349a/index.m3u8']},
-                         {name:'线路②', urls:['https://cdn4.ryplay4.com/share/bb715c1eef48f3facee948833ddf0b42']}
-                     ])"
-                     class="w-full aspect-[2/3] object-cover cursor-pointer">
-                <div class="p-3">
-                    <div class="font-medium truncate">神印王座 第204集</div>
-                    <button onclick="go('https://pan.baidu.com/xxx')" class="mt-2 w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 rounded">
-                        <i class="fa fa-cloud mr-1"></i>网盘转存
-                    </button>
-                </div>
-            </div>
-
-            <!-- 炼气十万年 -->
-            <div class="rounded-xl overflow-hidden bg-black/30 shadow-xl">
-                <img src="https://tncache1-f1.v3mh.com/image/25-10-06/3kRaoa5Rhf.jpg"
-                     onclick="openMultiSource('炼气十万年', [
-                         {name:'线路①', urls:['https://cdn4.ryplay4.com/20240923/69114_9595b84d/index.m3u8']},
-                         {name:'线路②', urls:['https://cdn4.ryplay4.com/share/dd17f824776acaba60131e5da0ef7547']}
-                     ])"
-                     class="w-full aspect-[2/3] object-cover cursor-pointer">
-                <div class="p-3">
-                    <div class="font-medium truncate">炼气十万年 第331集</div>
-                    <button onclick="go('https://pan.baidu.com/xxx')" class="mt-2 w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 rounded">
-                        <i class="fa fa-cloud mr-1"></i>网盘转存
-                    </button>
-                </div>
-            </div>
-
+<!-- 轮播 -->
+<div class="carousel">
+    <div class="carousel-item active">
+        <div class="absolute inset-0">
+            <img src="https://tv.puui.qpic.cn/tv/0/mz_tv_image_frontend_442f1e-8_1281176683_1774343769856205_pic_1920x800/0" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0F1014] via-black/60 to-transparent"></div>
         </div>
-    </section>
-
-    <!-- 网址导航 -->
-    <section id="nav" class="pb-10">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
-            <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>影视导航网址
-        </h2>
-        <div class="grid grid-cols-1 sm:cols-2 md:cols-3 lg:cols-4 gap-5">
-            <a href="https://www.xcyycn.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站1</div></div>
-            </a>
-            <a href="https://www.omofun.icu/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站2</div></div>
-            </a>
-            <a href="https://www.xckdy.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站3</div></div>
-            </a>
-            <a href="https://www.mgtvys.org/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站4</div></div>
-            </a>
-            <a href="https://www.jilinat.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站5</div></div>
-            </a>
-            <a href="https://www.nmzkzk.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站6</div></div>
-            </a>
-            <a href="http://www.kanxir.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站7</div></div>
-            </a>
-            <a href="https://www.xyys3.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站8</div></div>
-            </a>
-            <a href="https://www.gj-audio.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站9</div></div>
-            </a>
-            <a href="https://www.boma2007.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站10</div></div>
-            </a>
-            <a href="https://kdie.cc/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站11</div></div>
-            </a>
-            <a href="https://www.kan-pian.cc/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
-                <i class="fa fa-link text-2xl text-[#E50914]"></i>
-                <div><div class="font-medium text-lg">影视网站12</div></div>
-            </a>
+        <div class="relative container mx-auto px-5 z-10 h-full flex items-center max-w-xl">
+            <div>
+                <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold leading-tight mb-4">遮天<br>高清免费看</h1>
+                <p class="text-gray-300 text-lg mb-6">全网影视聚合，秒加载无广告</p>
+                <button onclick="go('https://baidu.com')" class="px-6 py-3 bg-[#E50914] rounded-full text-white font-medium hover:bg-[#c10810] transition-colors">
+                    <i class="fa fa-play mr-2"></i>立即观看
+                </button>
+            </div>
         </div>
-    </section>
-
-    <!-- 动漫导航 -->
-    <section class="mb-12">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
-            <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>动漫导航网址
-        </h2>
-        <div class="grid grid-cols-1 sm:cols-2 md:cols-3 lg:cols-4 gap-5">
-            <a href="https://www.agedm.io/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站1</div></div></a>
-            <a href="https://yhdm6.top/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站2</div></div></a>
-            <a href="https://skr.skr3.cc:666/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站3</div></div></a>
-            <a href="https://acg.pekolove.net/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站4</div></div></a>
-            <a href="https://iknice.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站5</div></div></a>
-            <a href="https://www.gugu3.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站6</div></div></a>
-            <a href="https://animoe.org/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站7</div></div></a>
-            <a href="https://dm.xifanacg.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站8</div></div></a>
-            <a href="https://acgfta.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站9</div></div></a>
-            <a href="https://www.fsdm02.com/" target="_blank" class="p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4"><i class="fa fa-link text-2xl text-[#E50914]"></i><div><div class="font-medium text-lg">动漫网站10</div></div></a>
-        </div>
-    </section>
+    </div>
 </div>
 
-<!-- 播放弹窗 -->
+<!-- 内容 -->
+<div class="container mx-auto px-5 py-16 space-y-20">
+
+<!-- 热门电影 -->
+<section id="movie">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
+        <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>热门电影
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        <div class="card rounded-xl overflow-hidden bg-black/30 shadow-xl">            
+            <img src="https://vip.dytt-img.com/upload/vod/20260321-1/447b6d4edee1580c14cffd23081f6028.jpg" 
+                 onclick="openMultiSource('河狸变身计划', [
+                     {name:'线路①', urls:['https://svip.ryiplay18.com/20260326/4133_c7531a9b/index.m3u8']},
+                     {name:'线路②', urls:['https://svip.ryiplay18.com/share/b2330fc4531de135266de49078c270dd']}
+                 ])"
+                 class="w-full aspect-[2/3] object-cover cursor-pointer">
+            <div class="p-3">
+                <div class="font-medium truncate">在线观看: 河狸变身计划</div>
+                <button onclick="go('https://pan.baidu.com/xxx')" class="mt-2 w-full text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 rounded">
+                    <i class="fa fa-cloud mr-1"></i>网盘转存观看
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 热门电视剧 -->
+<section id="tv">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
+        <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>热门电视剧
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        
+        <div class="card rounded-xl overflow-hidden bg-black/30 shadow-xl">
+            <img src="https://hongniuzyimage.com/cover/e7d278a2f3c239afeaf9526d7e275401.jpg" 
+                 onclick="openMultiSource('逐玉', [
+                     {name:'线路①', urls:['https://baidu.com/1','https://baidu.com/2']},
+                     {name:'线路②', urls:['https://baidu.com/1','https://baidu.com/2']}
+                 ])"
+                 class="w-full aspect-[2/3] object-cover cursor-pointer">
+            <div class="p-3">
+                <div class="font-medium truncate">在线播放: 逐玉</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- 热门动漫 -->
+<section id="anime">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
+        <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>热门动漫
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        
+        <div class="card rounded-xl overflow-hidden bg-black/30 shadow-xl">
+            <img src="https://tv.puui.qpic.cn/tv/0/mz_tv_image_frontend_442f1e-8_1281176683_1774343769856205_pic_480x720/0" 
+                 onclick="openMultiSource('遮天', [
+                     {name:'线路①', urls:['https://baidu.com/1','https://baidu.com/2']},
+                     {name:'线路②', urls:['https://baidu.com/1','https://baidu.com/2']}
+                 ])"
+                 class="w-full aspect-[2/3] object-cover cursor-pointer">
+            <div class="p-3">
+                <div class="font-medium truncate">遮天</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- 导航 -->
+<section id="nav" class="pb-10">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
+        <span class="w-2 h-8 bg-[#E50914] rounded-full"></span>电影导航网址
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <a href="https://baidu.com" target="_blank" class="card p-5 rounded-xl bg-white/10 hover:bg-white/15 flex items-center gap-4">
+            <i class="fa fa-link text-2xl text-[#E50914]"></i>
+            <div><div class="font-medium text-lg">影视网站</div><div class="text-sm text-gray-400">https://xxx.com</div></div>
+        </a>
+    </div>
+</section>
+
+</div>
+
+<!-- 多线路集数弹窗 -->
 <div id="episodeModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
     <div class="absolute inset-0 bg-black/80" onclick="closeModal()"></div>
     <div class="relative bg-[#1A1B20] rounded-xl w-[90%] max-w-2xl max-h-[80vh] overflow-y-auto p-6">
@@ -201,25 +152,46 @@
             <h3 id="modalTitle" class="text-xl font-bold">选择播放</h3>
             <button onclick="closeModal()" class="text-gray-400 hover:text-white"><i class="fa fa-times text-xl"></i></button>
         </div>
-        <div id="sourceTabs" class="flex gap-2 mb-4"></div>
-        <div id="episodeList" class="grid grid-cols-6 sm:cols-8 md:cols-10 gap-2"></div>
+        <div id="sourceTabs" class="flex gap-2 mb-4 flex-wrap"></div>
+        <div id="episodeList" class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 gap-2"></div>
     </div>
 </div>
 
-<footer class="bg-black/40 py-8 text-center text-gray-400 text-sm">
-    © 高端影视导航 - 多线路完美版
-</footer>
+<footer class="bg-black/40 py-8 text-center text-gray-400 text-sm">© 高端影视导航 - 可正常播放</footer>
 
 <script>
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-    navbar.classList.toggle('bg-black/70', window.scrollY > 30);
+    navbar.classList.toggle('glass', window.scrollY > 30);
     navbar.classList.toggle('py-3', window.scrollY > 30);
+    navbar.classList.toggle('bg-black/70', window.scrollY > 30);
 });
 
-function go(url) { window.open(url, '_blank'); }
+// 安全跳转（GitHub 可用）
+function go(url) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// 轮播
+let index = 0;
+const items = document.querySelectorAll('.carousel-item');
+if (items.length > 1) {
+  setInterval(() => {
+      items.forEach(i => i.classList.remove('active'));
+      index = (index + 1) % items.length;
+      items[index].classList.add('active');
+  }, 4500);
+}
+
 let currentSources = [];
 
+// 多线路 + 集数选择（GitHub 完美修复）
 function openMultiSource(title, sources) {
     currentSources = sources;
     document.getElementById('modalTitle').innerText = title + " - 选择线路";
@@ -227,7 +199,7 @@ function openMultiSource(title, sources) {
     tabs.innerHTML = '';
     sources.forEach((s, i) => {
         const b = document.createElement('button');
-        b.className = 'px-3 py-1 rounded bg-red-600 text-white';
+        b.className = 'px-3 py-1 rounded bg-[#E50914] text-white hover:bg-[#c10810] transition-colors';
         b.innerText = s.name;
         b.onclick = () => showEpisodes(i);
         tabs.appendChild(b);
@@ -242,9 +214,9 @@ function showEpisodes(sourceIndex) {
     const urls = currentSources[sourceIndex].urls;
     urls.forEach((url, i) => {
         const btn = document.createElement('button');
-        btn.className = 'py-2 px-3 bg-black/40 hover:bg-red-600 rounded text-center transition';
+        btn.className = 'py-2 px-3 bg-black/40 hover:bg-[#E50914] rounded text-center transition';
         btn.innerText = '第' + (i+1) + '集';
-        btn.onclick = () => { window.open(url, '_blank'); closeModal(); };
+        btn.onclick = () => { go(url); closeModal(); };
         list.appendChild(btn);
     });
 }
@@ -254,9 +226,10 @@ function closeModal() {
 }
 
 function setStyle(mode) {
-    if(mode === 'dark') document.body.className = 'bg-[#0F1014] text-white transition-colors duration-300';
-    if(mode === 'gold') document.body.className = 'bg-[#080600] text-[#F6E8C1] transition-colors duration-300';
-    if(mode === 'light') document.body.className = 'bg-[#F8F9FA] text-[#212529] transition-colors duration-300';
+    const body = document.body;
+    if(mode === 'dark') body.className = 'bg-[#0F1014] text-white transition-colors duration-300';
+    if(mode === 'gold') body.className = 'bg-[#080600] text-[#F6E8C1] transition-colors duration-300';
+    if(mode === 'light') body.className = 'bg-[#F8F9FA] text-[#212529] transition-colors duration-300';
 }
 </script>
 </body>
