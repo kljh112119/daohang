@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>播放页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body{background:#0F1014;color:#fff;margin:0;padding:20px;}
+        .container{max-width:650px;margin:50px auto;}
+        .back-btn{display:inline-block;margin-bottom:20px;padding:8px 16px;background:#333;color:#fff;border-radius:6px;text-decoration:none;}
+        .back-btn:hover{background:#444;}
+        .line-btn{padding:8px 14px;margin:0 8px 15px 0;background:#333;color:#fff;border:none;border-radius:6px;cursor:pointer;}
+        .line-btn.active{background:#E50914;}
+        .episode-btn{padding:8px 12px;margin:5px;background:#222;color:#fff;border:none;border-radius:6px;cursor:pointer;transition:background .2s;}
+        .episode-btn:hover{background:#E50914;}
+        .episode-container{display:flex;flex-wrap:wrap;gap:8px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 返回首页按钮 -->
+        <a href="index.html" class="back-btn"><i class="fa fa-arrow-left mr-2"></i>返回首页</a>
+        
+        <h1 id="videoTitle" class="text-2xl mb-10 text-center"></h1>
+        
+        <!-- 线路选择 -->
+        <div id="lineContainer" class="mb-10 text-center"></div>
+        
+        <!-- 集数选择 -->
+        <div id="episodeContainer" class="episode-container"></div>
+    </div>
+
+<script>
+// 所有播放链接集中存储（只在播放页加载）
+const videoSources={
+    // 电影（ID101-199）
+    101:{title:"河狸变身计划",lines:[
+        {name:"线路①",urls:["https://svip.ryiplay18.com/20260326/4133_c7531a9b/index.m3u8"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/b2330fc4531de135266de49078c270dd"]}
+    ]},
+    102:{title:"镖人:风起大漠",lines:[
+        {name:"线路①",urls:["https://svip.ryiplay18.com/20260219/2889_9b9b538e/index.m3u8"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/7f018eb7b301a66658931cb8a93fd6e8"]}
+    ]},
+    103:{title:"飞驰人生3",lines:[
+        {name:"线路①",urls:["https://svip.ryiplay18.com/20260219/2886_fbac9294/index.m3u8"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/15cf76466b97264765356fcc56d801d1"]}
+    ]},
+    104:{title:"角头:大桥头",lines:[
+        {name:"线路①",urls:["https://vodcnd10.myqqdd.com/20250503/FhDkp1ar/index.m3u8"]},
+        {name:"线路②",urls:["https://vodcnd10.myqqdd.com/share/eWGUZ8vaJg"]}
+    ]},
+    105:{title:"惊蛰无声",lines:[
+        {name:"线路①",urls:["https://svip.ryiplay18.com/20260219/2887_25c0e9b2/index.m3u8"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/1dba5eed8838571e1c80af145184e515"]}
+    ]},
+    
+    // 电视剧（ID201-299）
+    201:{title:"逐玉",lines:[
+        {name:"线路①",urls:[
+            "https://cdn.ryplay11.com/20260306/196720_e0586de6/index.m3u8",
+            "https://cdn.ryplay11.com/20260306/196721_7b97f157/index.m3u8",
+            "https://cdn.ryplay11.com/20260306/196722_8bc57067/index.m3u8",
+            "https://cdn.ryplay11.com/20260306/196719_be4b31ac/index.m3u8",
+            "https://cdn.ryplay11.com/20260306/196723_63efe3c3/index.m3u8",
+            "https://cdn.ryplay11.com/20260307/196752_a021d451/index.m3u8",
+            "https://cdn.ryplay11.com/20260307/196753_c0e3c160/index.m3u8",
+            "https://cdn.ryplay11.com/20260308/196796_794c89bb/index.m3u8",
+            "https://cdn.ryplay11.com/20260308/196797_7593a359/index.m3u8",
+            "https://cdn.ryplay11.com/20260309/196820_f3dcc8fc/index.m3u8",
+            "https://cdn.ryplay11.com/20260309/196821_f1f37777/index.m3u8",
+            "https://cdn.ryplay11.com/20260310/196852_917eb3c6/index.m3u8",
+            "https://cdn.ryplay11.com/20260310/196853_164e65c7/index.m3u8",
+            "https://cdn.ryplay11.com/20260311/196898_4449719f/index.m3u8",
+            "https://cdn.ryplay11.com/20260311/196899_fd7f2433/index.m3u8",
+            "https://cdn.ryplay11.com/20260312/196964_1e8ae84a/index.m3u8",
+            "https://cdn.ryplay11.com/20260312/196965_b5b00184/index.m3u8",
+            "https://cdn.ryplay11.com/20260313/197018_b75529eb/index.m3u8",
+            "https://cdn.ryplay11.com/20260313/197019_c1036496/index.m3u8",
+            "https://cdn.ryplay11.com/20260314/197055_ddcd4591/index.m3u8",
+            "https://cdn.ryplay11.com/20260314/197056_fd792b5e/index.m3u8",
+            "https://cdn.ryplay11.com/20260315/197085_0c553479/index.m3u8",
+            "https://cdn.ryplay11.com/20260315/197086_2b4a1945/index.m3u8",
+            "https://cdn.ryplay11.com/20260316/197161_5147f080/index.m3u8",
+            "https://cdn.ryplay11.com/20260317/197218_61e90634/index.m3u8",
+            "https://cdn.ryplay11.com/20260318/197269_93814031/index.m3u8",
+            "https://cdn.ryplay11.com/20260319/197323_00e8f437/index.m3u8",
+            "https://cdn.ryplay11.com/20260320/197396_22a31335/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197426_860bd6a8/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197428_b7773241/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197430_e9467166/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197431_1df8a744/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197432_521547d3/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197433_8e36be6b/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197434_747f0a23/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197435_51847cd4/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197436_6715f66e/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197437_d2eabe41/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197438_e3d97109/index.m3u8",
+            "https://cdn.ryplay11.com/20260321/197439_a8285452/index.m3u8"
+        ]},
+        {name:"线路②",urls:[
+            "https://svip.ryiplay18.com/202603/zhuoyu_01/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_02/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_03/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_04/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_05/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_06/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_07/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_08/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_09/index.m3u8",
+            "https://svip.ryiplay18.com/202603/zhuoyu_10/index.m3u8"
+        ]}
+    ]},
+    202:{title:"隐身的名字",lines:[
+        {name:"线路①",urls:["https://cdn.ryplay11.com/share/f684c37ea2b1ff47bdf7141e4bf314cf","https://cdn.ryplay11.com/share/b68702244743703ff2b833afb4921c28","https://cdn.ryplay11.com/share/361290ae59788e24e75f1595a083e7f7"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/yinshen_17","https://svip.ryiplay18.com/share/yinshen_18","https://svip.ryiplay18.com/share/yinshen_19"]}
+    ]},
+    203:{title:"她的盛焰",lines:[
+        {name:"线路①",urls:["https://cdn.ryplay11.com/share/d46324714432d74a3e661b9aec7c1361","https://cdn.ryplay11.com/share/8306bf8f0715996626ea94bea17af9c4"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/tashengyan_23","https://svip.ryiplay18.com/share/tashengyan_24"]}
+    ]},
+    
+    // 动漫（ID301-399）
+    301:{title:"吞噬星空",lines:[
+        {name:"线路①",urls:["https://svip.ryiplay18.com/202603/tunshi_216/index.m3u8"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/tunshi_216"]}
+    ]},
+    302:{title:"仙逆",lines:[
+        {name:"线路①",urls:["https://svip.ryiplay18.com/202603/xianni_133/index.m3u8"]},
+        {name:"线路②",urls:["https://svip.ryiplay18.com/share/xianni_133"]}
+    ]}
+};
+
+// 获取首页传递的剧集ID
+const urlParams=new URLSearchParams(window.location.search);
+const videoId=urlParams.get("id");
+const videoData=videoSources[videoId]||{title:"剧集不存在",lines:[]};
+
+// 渲染标题
+document.getElementById("videoTitle").innerText=videoData.title;
+
+// 渲染线路
+const lineContainer=document.getElementById("lineContainer");
+videoData.lines.forEach((line,index)=>{
+    const btn=document.createElement("button");
+    btn.className="line-btn"+(index===0?" active":"");
+    btn.innerText=line.name;
+    btn.onclick=()=>{
+        // 切换线路激活状态
+        document.querySelectorAll(".line-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        // 渲染对应线路的集数
+        renderEpisodes(index);
+    };
+    lineContainer.appendChild(btn);
+});
+
+// 渲染集数（默认显示第一条线路）
+function renderEpisodes(lineIndex){
+    const episodeContainer=document.getElementById("episodeContainer");
+    episodeContainer.innerHTML="";
+    const urls=videoData.lines[lineIndex].urls;
+    
+    urls.forEach((url,idx)=>{
+        const btn=document.createElement("button");
+        btn.className="episode-btn";
+        btn.innerText=`第${idx+1}集`;
+        btn.onclick=()=>window.open(url,"_blank");
+        episodeContainer.appendChild(btn);
+    });
+}
+
+// 初始加载第一条线路的集数
+if(videoData.lines.length>0)renderEpisodes(0);
+</script>
+</body>
+</html>
