@@ -1,40 +1,40 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高端影视导航</title>
+
+ 
+
+     
+      
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <style>
-        .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .card:hover { transform: translateY(-6px) scale(1.03); }
-        .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    <链接 链接="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="样式表">
+    <样式>
+        .card { 过渡: 变换 0.3秒 轻松, 盒子阴影 0.3秒 轻松; }
+
+
         
-        .carousel { position: relative; width: 100%; height: 80vh; overflow: hidden; }
-        .carousel-item { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
-        .carousel-item.active { opacity: 1; }
-    </style>
-</head>
+
+
+        .轮播项.激活 { 不透明度: 1; }
+    </样式>
+</头>
 <body class="bg-[#0F1014] text-white transition-colors duration-300">
 
-<!-- 风格切换 --> 
-<div class="fixed top-5 right-5 z-50 flex gap-2">
-    <button onclick="setStyle('dark')" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 text-sm">暗黑</button>
-    <button onclick="setStyle('gold')" class="w-9 h-9 rounded-full bg-[#D4AF37]/20 flex items-center justify-center hover:bg-[#D4AF37]/30 text-sm">金色</button>
-    <button onclick="setStyle('light')" class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 text-sm">浅色</button>
-</div>
+ 
+<div class="固定 顶部-5 右侧-5 z-50 弹性 间隔-2">
+    button "setStyle('dark')" 
+    button "setStyle('gold')" >
+button onclick="setStyle('light')" class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 text-sm">>
+
 
 <!-- 导航栏 -->
-<nav id="navbar" class="fixed w-full top-0 z-40 py-4 transition-all duration-300">
-    <div class="container mx-auto px-5 flex justify-between items-center">
-        <a href="#" class="text-2xl font-bold text-[#E50914]">影视导航</a>
+nav id 
+     
+        < href="#" class="text-2xl font-bold text-[#E50914]">影视导航</a>
         <a href="#" class="text-2xl font-bold text-[#E50914]">无广告 无广告 无广告 </a>
         <div class="hidden md:flex gap-6 text-lg">
              <a href="" class="hover:text-[#E50914] transition-colors">首页没有的到导航网址去看</a>
-            <a href="#movie" class="hover:text-[#E50914] transition-colors">热门电影</a>
-            <a href="#tv" class="hover:text-[#E50914] transition-colors">热门电视剧</a>
-            <a href="#anime" class="hover:text-[#E50914] transition-colors">热门动漫</a>
+            a  </>
+            a  </>
+            <a href="#anime" class="hover:text-[#E50914] transition-colors"></a>
             <a href="#nav" class="hover:text-[#E50914] transition-colors">网址导航</a>
         </div>
     </div>
